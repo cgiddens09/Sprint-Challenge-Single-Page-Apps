@@ -22,7 +22,7 @@ export default function CharacterCard(props) {
   return(
     <Card>
       <Char>
-        <img src={props.image} alt='character image' />
+        <img src={props.image} alt='character' />
         <h2>Name: {props.name}</h2>
         <p>Gender: {props.gender}</p>
         <p>Species: {props.species}</p>

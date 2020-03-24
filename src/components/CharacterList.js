@@ -1,38 +1,51 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import CharacterCard from "./CharacterCard";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
 import SearchForm from './SearchForm';
+import styled from 'styled-components';
+
+
+const Home = styled.button`
+width: 30%;
+margin-left: 35%;
+background-color: #6eccca;
+padding: 1%;
+border-radius: 10px;
+border: 1px solid black;
+`
+
 
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
-  const [character, setCharacter] = useState([]);
-  const [filteredCharacter, setFilteredCharacter] = useState([]);
+  const [characters, setCharacters] = useState([]);
+  const [filteredCharacters, setFilteredCharacters] = useState([]);
 
 
   useEffect(() => {
     axios.get('https://rickandmortyapi.com/api/character/')
       .then(response => {
-        setCharacter(response.data.results);
-        setFilteredCharacter(response.data.results);
+        setCharacters(response.data.results);
+        setFilteredCharacters(response.data.results);
         console.log(response.data.results);
       })
       .catch(error => {console.error(error);
       })
   }, []);
-  console.log(character)
+  
   return (
     
     <div>
       <nav>
         <Link to='/'>
-          <button>Home</button>
+          <Home>Home</Home>
         </Link>
-        <SearchForm setFilteredCharacter={setFilteredCharacter} character={character}/>
-    </nav>
-      {filteredCharacter.map(character => (
+        <SearchForm setFilteredCharacters={setFilteredCharacters} characters={characters}/>
+        
+      </nav>
+      {filteredCharacters.map(character => (
           <CharacterCard 
+          key={character.name}
           character={character} 
           image={character.image}
           name={character.name}
