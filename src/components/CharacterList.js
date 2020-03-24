@@ -8,12 +8,14 @@ import SearchForm from './SearchForm';
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
   const [character, setCharacter] = useState([]);
+  const [filteredCharacter, setFilteredCharacter] = useState([]);
+
 
   useEffect(() => {
-
     axios.get('https://rickandmortyapi.com/api/character/')
       .then(response => {
         setCharacter(response.data.results);
+        setFilteredCharacter(response.data.results);
         console.log(response.data.results);
       })
       .catch(error => {console.error(error);
@@ -27,9 +29,9 @@ export default function CharacterList() {
         <Link to='/'>
           <button>Home</button>
         </Link>
-        <SearchForm />
+        <SearchForm setFilteredCharacter={setFilteredCharacter} character={character}/>
     </nav>
-      {character.map(character => (
+      {filteredCharacter.map(character => (
           <CharacterCard 
           character={character} 
           image={character.image}

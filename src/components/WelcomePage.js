@@ -18,7 +18,7 @@ export default function WelcomePage() {
   background-color:#6eccca;
   color:black;
   padding: 3%;
-  margin-left: 19%;
+  margin-left: 22%;
   justify-content: center;
   border-radius: 10px;
   border: 1px solid black;
